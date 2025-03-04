@@ -2,11 +2,11 @@
   "Type": "script",
   "Scripts": [
     {
-      "Path": "mod.sh",
-      "Length": 1335,
+      "Path": "modkit.sh",
+      "Length": 1524,
       "CheckSumSize": 524288,
       "CheckSum": [
-        "722fd474c65560a2b840770659bde79712d82962"
+        "0d9c15cee461dfa6ccaed8515c734251a94d88c2"
       ]
     }
   ],
