@@ -87,6 +87,38 @@ Current conclusion:
 - These are target-device binaries or scripts from the MH2p environment, not project-owned source in this repo.
 - The wiki documents `pc` usage, but not its implementation source.
 
+## Related external tools
+
+### `vwcoding.ru` FEC generator
+
+Reference:
+
+- `https://vwcoding.ru/en/utils/fec/`
+
+What it is:
+
+- A public FEC/SWaP code generator for VAG platforms.
+- The page describes generating FEC codes from `VIN` and `VCRN`.
+- It lists many of the same FEC identifiers seen in the broader MIB ecosystem, including:
+  - `00060800` - Apple CarPlay
+  - `00060900` - Google AndroidAuto
+  - `FFFFFFF9` through `FFFFFFFE` - clear/remove-style FEC operations
+
+Why it is relevant:
+
+- It confirms that the FEC IDs used by `fecswap` are part of a broader VAG FEC/SWaP ecosystem, not unique to this repo.
+- It gives outside evidence that the repo's FEC operations are working in a real, shared format/domain.
+
+Why it is not the same thing as `fecswap`:
+
+- The `vwcoding.ru` tool is presented as a code generator for upload through tools such as OBDeleven or ODIS.
+- `fecswap` is documented in the ModKit wiki as a local utility that adds or removes signed FECs in a `.fecs` file on the target system.
+- No public evidence was found that `vwcoding.ru` publishes the source for `fecswap`, or that `fecswap` was built from that project.
+
+Current conclusion:
+
+- `vwcoding.ru` is related in subject matter and useful for context, but it is not currently evidence of the origin or build process for the `fecswap` binary in this repository.
+
 ## How these artifacts appear to be made
 
 Based on the repo contents plus the public wiki:
@@ -125,6 +157,7 @@ Short answer:
 - `README.md` in this repo
 - LawPaul GitHub repo page for `MH2p_SD_ModKit`
 - LawPaul project site: `https://lawpaul.github.io/MH2p_SD_ModKit_Site/`
+- `vwcoding.ru` FEC generator: `https://vwcoding.ru/en/utils/fec/`
 - LawPaul wiki pages mirrored by `github-wiki-see.page`, including:
   - `Utilities: fecswap (ModKit addition)`
   - `Utilities: pc`
