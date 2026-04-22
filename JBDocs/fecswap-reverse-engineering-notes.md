@@ -59,6 +59,118 @@ Interpretation:
 - it has a normal section/program header layout for a real compiled ELF
 - section headers are present, though we have not yet resolved named sections or symbol content in this environment
 
+Recovered section names:
+
+- `.note`
+- `.init`
+- `.text`
+- `.fini`
+- `.rodata`
+- `.ARM.extab`
+- `.ARM.exidx`
+- `.eh_frame`
+- `.init_array`
+- `.fini_array`
+- `.jcr`
+- `.data.rel.ro`
+- `.got`
+- `.data`
+- `.bss`
+- `.comment`
+- `.ARM.attributes`
+- `.shstrtab`
+
+Notably absent:
+
+- `.symtab`
+- `.dynsym`
+
+Interpretation:
+
+- the binary is stripped enough that there is no friendly symbol table to lean on
+- any deeper understanding will likely come from function-pattern analysis rather than named symbols
+
+Program header observations:
+
+- 4 program headers are present
+- no `PT_INTERP` segment was found
+
+Interpretation:
+
+- the binary does not advertise a normal ELF interpreter path
+- that suggests a fairly self-contained target binary rather than a conventional dynamically linked desktop-style executable
+
+## Low-effort static clues
+
+A light string pass produced several useful clues even without a disassembler.
+
+### Embedded option/help strings
+
+Recovered strings include:
+
+- `--add`
+- `-f [file]: .fecs file to modify`
+- `-r XXXXXXXX ...: remove FEC(s)`
+- `-rf XXXXXXXX ...: force remove FEC(s)`
+- `--file`
+- `--remove`
+- `--removeforce`
+- `--help`
+- `Display help message and exit.`
+
+Interpretation:
+
+- `fecswap` almost certainly has both short and long option parsing
+- the public wiki description is consistent with the binary's embedded help text
+- `-rf` is not just a wrapper convention from scripts; it appears to be a native binary option
+- `--add` is embedded too, which supports the expected symmetry with `-a`
+
+### File-oriented behavior clues
+
+Recovered strings also include:
+
+- `find_file`
+- `No such file or directory`
+- `File exists`
+- `Read-only file system`
+- `Identifier removed`
+- `identifier removed`
+
+Interpretation:
+
+- the binary likely emits user-facing status around identifier removal
+- the term `Identifier` suggests FEC entries may be treated internally as identifier records, not just blind byte patches
+
+### What did not show up
+
+A light scan did not surface obvious embedded references to:
+
+- `granted.fecs`
+- `illegal.fecs`
+- known FEC IDs like `00060900`
+- obvious `crc`, `sha`, or `sig` strings tied to custom validation logic
+
+Interpretation:
+
+- the target filenames are probably provided entirely by caller scripts rather than hard-coded
+- FEC IDs are likely parsed from command-line input rather than embedded as constant tables
+- absence of obvious crypto strings does not prove signatures are absent, but it does mean no simple string-level evidence of signature handling has surfaced yet
+
+## Build-environment clues
+
+Recovered from `.comment`:
+
+- `GCC: (GNU) 4.7.3`
+
+Recovered strings also include QNX-flavored build paths such as:
+
+- `/builds/660_SDP/svn/lib/c/alloc/malloc.c`
+
+Interpretation:
+
+- the binary appears to have been built in a QNX-oriented toolchain environment
+- that matches the MH2p target environment and makes it more likely that `fecswap` is a native helper built for this runtime rather than a repackaged generic Linux tool
+
 ## Known behavior from upstream usage
 
 From the ModKit wiki and public Android Auto scripts, `fecswap` is used to modify `.fecs` files.
@@ -104,6 +216,25 @@ Given the upstream usage pattern, the most likely behavior is:
 4. write the modified file back in a format the MH2p system accepts
 
 But this remains a hypothesis until a disassembler session confirms the parser and write path.
+
+## What "good enough" reverse engineering looks like here
+
+Because the goal is understanding rather than rebuilding or patching, a useful `phase 2` does not need perfect decompilation.
+
+A practical stopping point would be:
+
+1. identify `main`
+2. confirm argument parsing for:
+   - `-a`
+   - `-r`
+   - `-rf`
+   - `-f`
+3. locate the routine that reads `.fecs`
+4. determine whether entries are fixed-size or variable-length
+5. identify the add/remove decision path
+6. confirm whether the write path preserves opaque signed blobs or regenerates anything
+
+That would be enough to explain what the tool is doing without fully reconstructing its source.
 
 ## Recommended next step
 

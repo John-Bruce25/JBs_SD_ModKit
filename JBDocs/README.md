@@ -41,7 +41,7 @@ Some facts remain maddeningly out of reach.
 
 - `fecswap` is clearly important and clearly used, yet its source is not present here.
 - `mnfc` plainly generated the package metadata, yet the tool itself and its signing process remain absent from the evidence locker.
-- The Porsche bug-fix behavior is well described in public, but we do not yet have the full patch mechanics laid out from source in our local notes.
+- The Java-side mechanics of the Porsche bug fix are still partly obscured because `aafix.jar` itself has not yet been examined.
 
 So the shape of the crime is known, but not every fingerprint has been lifted.
 
@@ -59,6 +59,9 @@ So the shape of the crime is known, but not every fingerprint has been lifted.
 - [MH2p_FEC_SWAP_Analysis_Report.md](MH2p_FEC_SWAP_Analysis_Report.md)
   A wider comparative inquiry into MH2p, FEC/SWaP, Android Auto enablement, M.I.B., and the surrounding ecosystem of related projects.
 
+- [vw-to-mh2p-architecture-overview.md](vw-to-mh2p-architecture-overview.md)
+  The long-form narrative: what VW Group has in place, how the community hooks into it, and how those layers combine to make Android Auto work on Porsche MH2p/PCM5 systems.
+
 - [runtime-sequence.md](runtime-sequence.md)
   The full march of events from signed package to persistent execution, with the key paths and hand-offs laid out in order.
 
@@ -75,7 +78,7 @@ So the shape of the crime is known, but not every fingerprint has been lifted.
 
 - We have good evidence for how Android Auto is enabled in the MH2p ecosystem.
 - We have good evidence that 5F coding is part of that path, not an optional flourish.
-- We have decent evidence for how the Porsche persistence bug is conceptualized and integrated.
+- We have good evidence for the Porsche persistence-repair path and decent evidence for the surrounding jar-based repair flow.
 - We do not yet have strong source-level evidence for how `fecswap` or `mnfc` were built.
 
 In short: the trail is warm, the lantern is lit, and the quarry is very likely still ahead of us.

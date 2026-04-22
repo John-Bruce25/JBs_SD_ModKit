@@ -99,9 +99,9 @@ Sources:
 
 ### 4) What the Porsche fix changes
 
-Status: `answered fairly well`
+Status: `answered well`
 
-Direct evidence from the `pcm5-androidauto-connect-fix` README:
+Direct evidence from the `pcm5-androidauto-connect-fix` README and source:
 
 - it identifies a bug in `DeviceManager$DeviceActivationRequestHandler.moveSelectionMarker()`
 - the buggy logic demotes inactive devices to `NATIVE_SELECTED`
@@ -110,6 +110,8 @@ Direct evidence from the `pcm5-androidauto-connect-fix` README:
 - the repair replaces `NATIVE_SELECTED` with `DISCLAIMER_ACCEPTED`
 - it recalculates CRC32 and updates the serialized blob cleanly
 - it says the patch is loaded via bootclasspath injection in `lsd.sh`
+- the public `fix_partition_1008.c` source confirms the SQLite queries, blob parsing, replacement logic, and CRC32 rewrite path
+- the public ModKit wrapper scripts confirm the install/uninstall deployment flow for `aafix.jar` and `fix_partition_1008`
 
 Interpretation:
 
@@ -119,11 +121,14 @@ Interpretation:
 
 What is still missing:
 
-- We have the README-level design, but not yet the actual source files in hand for `fix_partition_1008.c`, the `lsd` patch files, or the mod wrapper scripts from that repo.
+- We still do not have the actual `aafix.jar` internals or the exact loader patch content that gives it precedence.
 
 Sources:
 
 - `https://github.com/fifthBro/pcm5-androidauto-connect-fix/blob/main/README.md`
+- `https://github.com/fifthBro/pcm5-androidauto-connect-fix/blob/main/fix_partition_1008/fix_partition_1008.c`
+- `https://github.com/fifthBro/pcm5-androidauto-connect-fix/blob/main/MH2p_ModKit_Mod/AndroidAuto_Fix/Update/install.sh`
+- `https://github.com/fifthBro/pcm5-androidauto-connect-fix/blob/main/MH2p_ModKit_Mod/AndroidAuto_Fix/Update/uninstall.sh`
 
 ### 5) Whether MH2p mods can do more than FEC/coding
 
@@ -226,6 +231,8 @@ What we know:
 - the README explains the exact bug and the intended fix
 - `MH2p_AndroidAuto` deploys `aafix.jar`
 - the fix is said to load through bootclasspath injection
+- the persistence repair path is source-backed by `fix_partition_1008.c`
+- the ModKit deployment wrapper is source-backed by the public install/uninstall scripts
 
 What we do not yet have:
 
@@ -235,8 +242,9 @@ What we do not yet have:
 
 Current confidence:
 
-- medium confidence on the functional intent
-- lower confidence on the exact implementation mechanics
+- high confidence on the persistence repair mechanics
+- medium confidence on the wrapper/deployment mechanics
+- lower confidence on the exact Java loader precedence and `aafix.jar` internals
 
 ## Best next steps
 
