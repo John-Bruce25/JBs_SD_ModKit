@@ -87,6 +87,33 @@ Current conclusion:
 - These are target-device binaries or scripts from the MH2p environment, not project-owned source in this repo.
 - The wiki documents `pc` usage, but not its implementation source.
 
+## What Can Probably Be Ignored For Now
+
+These binaries matter operationally, but they are not currently the main research bottleneck:
+
+- `/mnt/app/eso/bin/apps/showimage`
+- `/mnt/app/armle/usr/bin/pc`
+- the original `/mnt/app/eso/bin/servicemgrmibhigh`
+
+Why:
+
+- we already know enough about their role to understand the ModKit flow
+- the highest-value open questions are centered instead on:
+  - `fecswap`
+  - `mnfc`
+  - the exact Porsche repair mechanics
+
+## Priority Unknowns
+
+The most important remaining opaque artifacts are:
+
+- `fecswap`
+- `mnfc`
+
+`fecswap` matters because it is directly involved in feature activation by editing `.fecs` files.
+
+`mnfc` matters because it appears to be responsible for manifest generation and package metadata, but it is less urgent for understanding how mods behave after execution begins.
+
 ## Related external tools
 
 ### `vwcoding.ru` FEC generator

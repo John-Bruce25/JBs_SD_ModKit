@@ -59,6 +59,18 @@ So the shape of the crime is known, but not every fingerprint has been lifted.
 - [MH2p_FEC_SWAP_Analysis_Report.md](MH2p_FEC_SWAP_Analysis_Report.md)
   A wider comparative inquiry into MH2p, FEC/SWaP, Android Auto enablement, M.I.B., and the surrounding ecosystem of related projects.
 
+- [runtime-sequence.md](runtime-sequence.md)
+  The full march of events from signed package to persistent execution, with the key paths and hand-offs laid out in order.
+
+- [android-auto-activation-path.md](android-auto-activation-path.md)
+  A source-backed walkthrough of how Android Auto is actually enabled: FECs, 5F coding, and Porsche-specific repair logic.
+
+- [porsche-aa-fix-mechanics.md](porsche-aa-fix-mechanics.md)
+  Notes on the Porsche multi-phone repair path, including the source-backed persistence fix and the jar deployment wrapper.
+
+- [fecswap-reverse-engineering-notes.md](fecswap-reverse-engineering-notes.md)
+  Our first reverse-engineering notebook for the bundled ARM `fecswap` binary, including fingerprinting and the remaining unknowns.
+
 ## Present Condition Of The Inquiry
 
 - We have good evidence for how Android Auto is enabled in the MH2p ecosystem.

@@ -2,7 +2,7 @@
 
 This note captures the highest-value research questions for the `MH2p_SD_ModKit` ecosystem, what we can answer now from available sources, and which areas still do not have strong source data.
 
-## Top questions
+## Key research questions
 
 1. How does `MH2p_AndroidAuto` actually enable Android Auto?
 2. What does "codes 5F" mean in concrete implementation terms?
@@ -12,7 +12,7 @@ This note captures the highest-value research questions for the `MH2p_SD_ModKit`
 6. Is `MH2p_SD_ModKit` reusing older M.I.B.-style FEC workflows, or doing something different?
 7. Where do `fecswap` and the `mnfc` packaging/signing tool come from, and how are they built?
 
-## Findings with good evidence
+## Behavior now established
 
 ### 1) How `MH2p_AndroidAuto` enables Android Auto
 
@@ -147,7 +147,7 @@ Sources:
 
 - `https://github.com/LawPaul/MH2p_CarPlay_FullScreen/blob/main/README.md`
 
-### 6) Whether the MH2p workflow is adjacent to older M.I.B./FEC workflows
+### 6) Comparative context with older M.I.B./FEC workflows
 
 Status: `answered moderately well`
 
@@ -172,7 +172,7 @@ Sources:
 - `https://github.com/Mr-MIBonk/M.I.B._More-Incredible-Bash/wiki/MHI2-MHI2Q-FEC-overview`
 - `https://github.com/LawPaul/MH2p_AndroidAuto/blob/main/Update/install.sh`
 
-## Questions with weak or incomplete data
+## Implementation still unresolved
 
 ### 7) Where `fecswap` comes from and how it is built
 
